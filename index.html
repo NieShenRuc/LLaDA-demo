@@ -33,7 +33,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <title>Large Language Diffusion Models</title>
-        <link rel="icon" type="image/x-icon" href="static/images/favicon.ico" />
         <link
             href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
             rel="stylesheet"
@@ -184,10 +183,10 @@
                                 </div>
                             </div>
 
-                            <!-- TL;DR Section -->
-                            <div class="notification is-light is-size-5 has-text-centered" style="padding: 15px; margin-top: 20px;">
-                                <strong>TL;DR:</strong> <span style="color: #1E88E5;">We present LLaDA, a 8B parameters diffusion  language model trained from scratch that is competitive to LLaMA 3.</span>
-                            </div>
+                            <p style="text-align: center; margin-top: 20px; font-size: 24px;">
+                                <strong>TL;DR:</strong> <span style="color: #1E88E5;">We present LLaDA, a diffusion
+                                language model trained from scratch that is competitive to LLaMA 3.</span>
+                            </p>
 
                         </div>
                     </div>
@@ -236,10 +235,11 @@
             ></div>
             <div
                 class="container is-max-desktop content"
-                style="position: relative; font-size: 1.5rem; color: #1E88E5; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); font-style: italic;"
-        >
-            What is now proved was once only imagined.   ——— William Blake
+                style="position: relative; font-size: 1.8rem; color: #1E88E5; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); font-style: italic; font-family: 'Times New Roman', serif;"
+            >
+                What is now proved was once only imagined. ——— William Blake
             </div>
+
             <div
                 style="
                     position: absolute;
@@ -256,17 +256,15 @@
 
         <section class="section" id="Introduction">
             <div class="container is-max-desktop content">
-                <h2 class="title">Motivation</h2>
-                <blockquote
-                    style="font-size: 1.4rem; font-weight: bold; color: #333; text-align: center; margin: 20px 0; padding: 15px; border-left: 4px solid #1E88E5; background: rgba(30, 136, 229, 0.05);"
-                >
-                    Compression is Intelligence.   ——— Ilya Sutskever
-                </blockquote>
+                <h2 class="title" style="font-family: 'Times New Roman', serif;">
+                    Motivation
+                </h2>
 
-                <p style="font-size: 1.7rem; font-family: 'Times New Roman', Times, serif;">
+                <p style="font-size: 1.6rem; font-family: 'Times New Roman', Times, serif;">
                     We assume that large language models derive their intelligence not from the autoregressive
                     mechanism itself, but from the fundamental principle of generative modeling—approximating
                     the true language distribution via maximum likelihood estimation or KL divergence minimization.
+
                 </p>
                 <img
                     src="static/images/min_kl.svg"
@@ -279,25 +277,35 @@
                     "
                 />
 
-                <h2 class="title">Method</h2>
+                <p style="font-size: 1.6rem; font-family: 'Times New Roman', Times, serif;">
+                    The training objective of masked diffusion models on text has been shown to serve as an upper
+                    bound on the negative log-likelihood of the model distribution [1, 2], which is equivalent
+                    to maximum likelihood estimation and minimization of the KL divergence.
+                </p>
 
-                <p style="font-size: 1.7rem; font-family: 'Times New Roman', Times, serif;">
-                    LLaDA is a masked diffusion model [1, 2, 3] that employs the following methods
-                    for pre-training, supervised fine-tuning, and sampling.
+                <h2 class="title" style="font-family: 'Times New Roman', serif;">
+                    Method
+                </h2>
+
+                <p style="font-size: 1.6rem; font-family: 'Times New Roman', Times, serif;">
+                    LLaDA is a masked diffusion model [1, 2] that employs the following methods
+                    for pre-training , supervised fine-tuning (SFT), and sampling.
                 </p>
             </div>
 
             <div style="width: 100%; max-width: 1400px; margin: 0 auto; overflow: hidden;">
                 <img
-                    src="static/images/method.png"
-                    alt="min_kl"
+                    src="static/images/method.svg"
+                    alt="method"
                     style="width: 100%; height: auto; display: block; margin-bottom: 30px;"
                 />
             </div>
 
             <div class="container is-max-desktop content">
-                <h2 class="title">Scalability</h2>
-                <p style="font-size: 1.7rem; font-family: 'Times New Roman', Times, serif;">
+                <h2 class="title" style="font-family: 'Times New Roman', serif;">
+                    Scalability
+                </h2>
+                <p style="font-size: 1.6rem; font-family: 'Times New Roman', Times, serif;">
                     LLaDA demonstrates impressive scalability, with its overall
                     trend being highly competitive with that of autoregressive baseline.
                 </p>
@@ -354,7 +362,7 @@
         </section>
 
 
-        <section class="section" id="Sampling Process" style="text-align: center;">
+        <section class="section" id="Sampling Process">
             <div
             style="
                 width: 100%;
@@ -364,303 +372,332 @@
                 "
             ></div>
 
-            <h2 class="title">Sampling process of LLaDA Instruct</h2>
+            <div class="container is-max-desktop content">
 
-            <p style="font-size: 1.5rem; font-family: 'Times New Roman', Times, serif;">
-                Prompt: <i>Lily can run 12 kilometers per hour for 4 hours. After that,
-                she runs 6 kilometers per hour. How many kilometers can she run in 8 hours?</i>
-            </p>
+                <h2 class="title" style="font-family: 'Times New Roman', serif;">
+                    A text generation method different from the traditional left-to-right approach
+                </h2>
 
-            <img
-                src="static/images/diff.gif"
-                alt="diff.gif"
-                style="width: 60%; height: auto; display: block; margin-bottom: 30px; margin-left: auto; margin-right: auto;"
-            />
+                <p style="font-size: 1.6rem; font-family: 'Times New Roman', Times, serif;">
+                    Prompt: <i>Explain what artificial intelligence is.</i>
+                </p>
 
-            <p style="font-size: 1.5rem; font-family: 'Times New Roman', Times, serif;">
-                We replace the |MASK| tokens with the clean data prediction results during sampling.
-            </p>
+                <img
+                    src="static/images/diff_normal_150ms.gif"
+                    alt="diff_normal_150ms.gif"
+                    style="width: 100%; height: auto; display: block; margin-bottom: 10px; margin-left: auto; margin-right: auto;"
+                />
 
-            <img
-                src="static/images/diff_remask.gif"
-                alt="diff_remask.gif"
-                style="width: 60%; height: auto; display: block; margin-bottom: 30px; margin-left: auto; margin-right: auto;"
-            />
-
-            <p style="font-size: 1.5rem; font-family: 'Times New Roman', Times, serif;">
-                LLaDA can generate in a next-token prediction manner.
-            </p>
-
-            <img
-                src="static/images/ar.gif"
-                alt="ar.gif"
-                style="width: 60%; height: auto; display: block; margin-bottom: 30px; margin-left: auto; margin-right: auto;"
-            />
-
-            <p style="font-size: 1.5rem; font-family: 'Times New Roman', Times, serif;">
-                LLaDA can generate in a semi-autoregressive manner.
-            </p>
-
-            <img
-                src="static/images/sar.gif"
-                alt="sar.gif"
-                style="width: 60%; height: auto; display: block; margin-bottom: 30px; margin-left: auto; margin-right: auto;"
-            />
+             </div>
 
         </section>
 
 
-<!--        <section class="section" id="Case study">-->
-<!--            <div class="container is-max-desktop content">-->
-<!--                <h2 class="title">Cases</h2>-->
-<!--                <h3 class="title">Single-turn Dialogue</h3>-->
-<!--                <table>-->
-<!--                    <tr>-->
-<!--                        <th>Math dialogue</th>-->
-<!--                        <td></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>User</th>-->
-<!--                        <td>-->
-<!--                            Emma decides to run 4 sprints 5 times a week. She-->
-<!--                            runs 75 meters each sprint. How many total meters-->
-<!--                            does she run a week?-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>LLaDA-Instruct</th>-->
-<!--                        <td>-->
-<!--                            Emma runs 4 sprints each time, so she runs a total-->
-<!--                            of 4 x 5 = 20 sprints a week. Each sprint is 75-->
-<!--                            meters long, so Emma runs a total of 20 x 75 = 1500-->
-<!--                            meters a week. The final result is 1500-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                </table>-->
-<!--                <hr />-->
-<!--                <table>-->
-<!--                    <tr>-->
-<!--                        <th>Code dialogue</th>-->
-<!--                        <td></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>User</th>-->
-<!--                        <td>-->
-<!--                            I am writing python code, I have an array, please-->
-<!--                            help me sort it from largest to smallest-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>LLaDA-Instruct</th>-->
-<!--                        <td>-->
-<!--                            Certainly! You can sort an array from the largest to-->
-<!--                            smallest in Python using the ‘sort()’ method or the-->
-<!--                            ‘sorted()‘ function. Here’s an example: <br />-->
-<!--                            ### Using ‘sort()’ method: <br />my array = [3, 1,-->
-<!--                            4, 1, 5, 2] <br />my array.sort(reverse=True)<br />-->
-<!--                            print(my array)-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                </table>-->
-<!--                <hr />-->
-<!--                <table>-->
-<!--                    <tr>-->
-<!--                        <th>Translation dialogue</th>-->
-<!--                        <td></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>User</th>-->
-<!--                        <td>-->
-<!--                            Please help me translate into Chinese: ‘What is now-->
-<!--                            proved was once only imagined’-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>LLaDA-Instruct</th>-->
-<!--                        <td>现在被证明的曾经只是想象</td>-->
-<!--                    </tr>-->
-<!--                </table>-->
-<!--                <hr />-->
-<!--                <table>-->
-<!--                    <tr>-->
-<!--                        <th>Translation dialogue</th>-->
-<!--                        <td></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>User</th>-->
-<!--                        <td>-->
-<!--                            Please help me translate into German: ‘What is now-->
-<!--                            proved was once only imagined’-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>LLaDA-Instruct</th>-->
-<!--                        <td>-->
-<!--                            Wer heute bestätigt ist, war einst nur immaginiert.-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                </table>-->
+        <section class="section" id="Case study">
+            <div
+            style="
+                width: 100%;
+                height: 1px;
+                background-color: rgba(0, 0, 0, 0.1);
+                margin: 0 auto 15px auto;
+                "
+            ></div>
 
-<!--                <h3 class="title">Multi-turn Dialogue</h3>-->
-<!--                <table>-->
-<!--                    <tr>-->
-<!--                        <th>Daily life dialogue</th>-->
-<!--                        <td></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>User</th>-->
-<!--                        <td>How do I start learning programming?</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>LLaDA-Instruct</th>-->
-<!--                        <td>-->
-<!--                            To learn programming, you can start by choosing a-->
-<!--                            programming language that you are interested in.-->
-<!--                            Some popular languages include Python, Java, and-->
-<!--                            C++.-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>User</th>-->
-<!--                        <td>-->
-<!--                            Which programming language should I learn first?-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>LLaDA-Instruct</th>-->
-<!--                        <td>-->
-<!--                            It depends on your interests and goals. Python is a-->
-<!--                            great language for beginners for its simplicity and-->
-<!--                            versatility.-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>User</th>-->
-<!--                        <td>How long does it take to learn Python?</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>LLaDA-Instruct</th>-->
-<!--                        <td>-->
-<!--                            It can take anywhere from a few weeks to several-->
-<!--                            months to learn Python.-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>User</th>-->
-<!--                        <td>-->
-<!--                            What are some good Python projects for beginners?-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>LLaDA-Instruct</th>-->
-<!--                        <td>-->
-<!--                            Some good Python projects for beginners include-->
-<!--                            building a simple calculator, a game, and a web-->
-<!--                            application.-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                </table>-->
-<!--                <hr />-->
-<!--                <table>-->
-<!--                    <tr>-->
-<!--                        <th>Math dialogue</th>-->
-<!--                        <td></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>User</th>-->
-<!--                        <td>-->
-<!--                            Natalia sold clips to 48 of her friends in April,-->
-<!--                            and then she sold half as many clips in May. How-->
-<!--                            many clips did Natalia sell altogether in April and-->
-<!--                            May?-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>LLaDA-Instruct</th>-->
-<!--                        <td>-->
-<!--                            Natalia sold clips to 48 friends in April. She sold-->
-<!--                            half as many clips in May, so she sold 48/2 = 24-->
-<!--                            clips in May. Altogether, Natalia sold 48 + 24 = 72-->
-<!--                            clips in April and May. The final result is 72.-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>User</th>-->
-<!--                        <td>-->
-<!--                            Natalia sold three times as many items in June as-->
-<!--                            she did in May. How many clips did Natalia sell-->
-<!--                            altogether in these three months?-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>LLaDA-Instruct</th>-->
-<!--                        <td>-->
-<!--                            Natalia sold clips to 48 friends in April. She sold-->
-<!--                            half as many clips in May, so she sold 48/2 = 24-->
-<!--                            clips in May. Natalia sold three times as many items-->
-<!--                            in June as she did in May, so she sold 24 * 3 = 72-->
-<!--                            clips in June. Altogether, Natalia sold 48 + 24 + 72-->
-<!--                            = 144 clips in these three months. The final result-->
-<!--                            is 144.-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                </table>-->
-<!--                <h3 class="title">Poem Reversal Completion</h3>-->
-<!--                <table>-->
-<!--                    <tr>-->
-<!--                        <th>Q1</th>-->
-<!--                        <td></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>User</th>-->
-<!--                        <td>‘但闻人语响’的上一句是什么?</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>GPT-4o</th>-->
-<!--                        <td>-->
-<!--                            “但闻人语响”的上一句是“无可奈何花落去”,这两句出自唐代词人李清照的（武陵春，春晚:-->
-<!--                            无可奈何花落去，但闻人语响。这首词表达了作者在春天时节的孤独与-->
-<!--                            感伤，借花落和人语声的描写，反映出词人内心的无亲与失落。-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>LLaDA-Instruct</th>-->
-<!--                        <td>“但闻人语响”的上一句是“空山不见人”</td>-->
-<!--                    </tr>-->
-<!--                </table>-->
-<!--                <hr />-->
-<!--                <table>-->
-<!--                    <tr>-->
-<!--                        <th>Q2</th>-->
-<!--                        <td></td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>User</th>-->
-<!--                        <td>‘夜静春山空’的上一句是什么?</td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>GPT-4o</th>-->
-<!--                        <td>-->
-<!--                            “夜静春山空”的上一句是“空山新雨后”.这两句出自唐代诗人王维的（山居秋-->
-<!--                            膜）:空山新雨后，夜静春山空。这首诗描绘了春天山中雨后的寂静与空灵，-->
-<!--                            表现出自然的宁静与和谐美。-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <th>LLaDA-Instruct</th>-->
-<!--                        <td>“夜静春山空”的上一句是“人闲桂花落”</td>-->
-<!--                    </tr>-->
-<!--                </table>-->
-<!--            </div>-->
-<!--        </section>-->
+            <div class="container is-max-desktop content">
+                <h2 class="title" style="font-family: 'Times New Roman', serif;">
+                    Case Studies
+                </h2>
+
+                <div style="width: 100%; font-family: 'Times New Roman', serif; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+                    <!-- Title Section -->
+                    <div style="background-color: #f4f4f4; padding: 15px; font-weight: bold; text-align: center; border-bottom: 1px solid #ddd; font-size: 24px;">
+                        Math problem
+                    </div>
+
+                        <!-- User and LLaDA-Instruct Sections -->
+                        <div style="display: flex; flex-direction: column; padding: 20px;">
+
+                            <!-- User Section -->
+                            <div style="margin-bottom: 20px;">
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">User</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Emma decides to run 4 sprints 5 times a week. She runs 75 meters each sprint. How many total meters does she run a week?
+                                </div>
+                            </div>
+
+                            <!-- LLaDA-Instruct Section -->
+                            <div>
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">LLaDA-Instruct</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Emma runs 4 sprints each time, so she runs a total of 4 x 5 = 20 sprints a week. Each sprint is 75 meters long, so Emma runs a total of 20 x 75 = 1500 meters a week. The final result is 1500.
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <div style="width: 100%; font-family: 'Times New Roman', serif; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+                    <!-- Title Section -->
+                    <div style="background-color: #f4f4f4; padding: 15px; font-weight: bold; text-align: center; border-bottom: 1px solid #ddd; font-size: 24px;">
+                        Daily life
+                    </div>
+
+                        <!-- User and LLaDA-Instruct Sections -->
+                        <div style="display: flex; flex-direction: column; padding: 20px;">
+
+                            <!-- User Section -->
+                            <div style="margin-bottom: 20px;">
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">User</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Please recommend me three famous movies
+                                </div>
+                            </div>
+
+                            <!-- LLaDA-Instruct Section -->
+                            <div>
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">LLaDA-Instruct</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Certainly! Here are three famous movies that have achieved widespread popularity and critical acclaim: <br>
+                                    1. <b>The Shawshank Redemption</b> (1994) - Inspired by a novella and directed by Frank Darabont, this film tells the story of Andy Dufresne, a man convicted of murdering his wife, dealing with his harsh life in Shawshank Prison and forming an unlikely friendship with a fellow inmate. <br>
+                                    2. <b>The Godfather</b> (1972) - Directed by Francis Ford Coppola, this film is based on Mario Puzo's novel of the same name. It follows the story of the Corleone family, particularly Michael Corleone, who rises to power and takes over the family's criminal empire. <br>
+                                    3. <b>The Empire Strikes Back</b> (1980) - Directed by George Lucas, this film continues the story of a young Skywalker in the Star Wars saga. It follows Luke Skywalker as he helps the Rebel Alliance fight against the Galactic Empire and destroy the powerful weapon, the Death Star. <br>
+                                    All of these films are celebrated for their cinematic achievements, powerful storytelling, and memorable characters.
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <div style="width: 100%; font-family: 'Times New Roman', serif; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+                    <!-- Title Section -->
+                    <div style="background-color: #f4f4f4; padding: 15px; font-weight: bold; text-align: center; border-bottom: 1px solid #ddd; font-size: 24px;">
+                        Code generation
+                    </div>
+
+                        <!-- User and LLaDA-Instruct Sections -->
+                        <div style="display: flex; flex-direction: column; padding: 20px;">
+
+                            <!-- User Section -->
+                            <div style="margin-bottom: 20px;">
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">User</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    I am writing python code, I have an array, please
+                                    help me sort it from largest to smallest
+                                </div>
+                            </div>
+
+                            <!-- LLaDA-Instruct Section -->
+                            <div>
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">LLaDA-Instruct</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Certainly! You can sort an array from the largest to
+                                    smallest in Python using the ‘sort()’ method or the
+                                    ‘sorted()‘ function. Here’s an example: <br />
+                                    ### Using ‘sort()’ method: <br />my array = [3, 1,
+                                    4, 1, 5, 2] <br />my array.sort(reverse=True)<br />
+                            print(my array)
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <div style="width: 100%; font-family: 'Times New Roman', serif; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+                    <!-- Title Section -->
+                    <div style="background-color: #f4f4f4; padding: 15px; font-weight: bold; text-align: center; border-bottom: 1px solid #ddd; font-size: 24px;">
+                        Translation (English &rarr; Chinese)
+                    </div>
+
+                        <!-- User and LLaDA-Instruct Sections -->
+                        <div style="display: flex; flex-direction: column; padding: 20px;">
+
+                            <!-- User Section -->
+                            <div style="margin-bottom: 20px;">
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">User</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Please help me translate into Chinese: ‘What is now proved was once only imagined’
+                                </div>
+                            </div>
+
+                            <!-- LLaDA-Instruct Section -->
+                            <div>
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">LLaDA-Instruct</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    现在被证明的曾经只是想象
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <div style="width: 100%; font-family: 'Times New Roman', serif; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+                    <!-- Title Section -->
+                    <div style="background-color: #f4f4f4; padding: 15px; font-weight: bold; text-align: center; border-bottom: 1px solid #ddd; font-size: 24px;">
+                        Translation (English &rarr; German)
+                    </div>
+
+                        <!-- User and LLaDA-Instruct Sections -->
+                        <div style="display: flex; flex-direction: column; padding: 20px;">
+
+                            <!-- User Section -->
+                            <div style="margin-bottom: 20px;">
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">User</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Please help me translate into German: ‘What is now proved was once only imagined’
+                                </div>
+                            </div>
+
+                            <!-- LLaDA-Instruct Section -->
+                            <div>
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">LLaDA-Instruct</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Wer heute bestätigt ist, war einst nur immaginiert.
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <div style="width: 100%; font-family: 'Times New Roman', serif; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+                    <!-- Title Section -->
+                    <div style="background-color: #f4f4f4; padding: 15px; font-weight: bold; text-align: center; border-bottom: 1px solid #ddd; font-size: 24px;">
+                        Multi-turn dialogue case 1
+                    </div>
+
+                        <!-- User and LLaDA-Instruct Sections -->
+                        <div style="display: flex; flex-direction: column; padding: 20px;">
+
+                            <!-- User Section -->
+                            <div style="margin-bottom: 20px;">
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">User</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Could you please share with me what the initial two lines of the renowned poem `The Road Not Taken'?
+                                </div>
+                            </div>
+
+                            <!-- LLaDA-Instruct Section -->
+                            <div>
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">LLaDA-Instruct</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Certainly! The initial two lines of the renowned poem ``The Road Not Taken" by Robert Frost are: ``Two roads diverged in a yellow wood,
+                                    And sorry I could not travel both." These lines set the stage for the poem, introducing the idea of a speaker facing a choice between two paths.
+                                </div>
+                            </div>
+
+                            <!-- User Section -->
+                            <div style="margin-bottom: 20px;">
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">User</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Please help me translate into Chinese.
+                                </div>
+                            </div>
+
+                            <!-- LLaDA-Instruct Section -->
+                            <div>
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">LLaDA-Instruct</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Sure! The first two lines of ``The Road Not Taken" by Robert Frost can be translated into Chinese as:
+                                    ``两条路分岔在黄色的树林中，遗憾我不能同时走''
+                                </div>
+                            </div>
+
+
+                            <!-- User Section -->
+                            <div style="margin-bottom: 20px;">
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">User</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Please translate into German.
+                                </div>
+                            </div>
+
+                            <!-- LLaDA-Instruct Section -->
+                            <div>
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">LLaDA-Instruct</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Sure! The first two lines of ``The Road Not Taken" by Robert Frost can be translated into German as:
+                                    ``Zwei Wege trennten sich im gelben Wald, und leider konnte ich nicht beide tun."
+                                </div>
+                            </div>
+
+                            <!-- User Section -->
+                            <div style="margin-bottom: 20px;">
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">User</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Please also write a poem about life choices. I require 5 sentences, and the first word of each sentence starts with C as the first letter.
+                                </div>
+                            </div>
+
+                            <!-- LLaDA-Instruct Section -->
+                            <div>
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">LLaDA-Instruct</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Certainly! Here's a poem about life choices, with each sentence starting with the letter ``C":
+                                    Choices cascade through life's journey, Creating connections with each decision, Careful
+                                    consideration leads to better paths, Courageous choices shape our destiny, Choosing wisely guides us through the years.
+                                </div>
+                            </div>
+
+
+                        </div>
+                </div>
+
+                <div style="width: 100%; font-family: 'Times New Roman', serif; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+                    <!-- Title Section -->
+                    <div style="background-color: #f4f4f4; padding: 15px; font-weight: bold; text-align: center; border-bottom: 1px solid #ddd; font-size: 24px;">
+                        Multi-turn dialogue case 2
+                    </div>
+
+                        <!-- User and LLaDA-Instruct Sections -->
+                        <div style="display: flex; flex-direction: column; padding: 20px;">
+
+                            <!-- User Section -->
+                            <div style="margin-bottom: 20px;">
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">User</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Natalia sold clips to 48 of her friends in April, and then she sold half as many clips in May.
+                                    How many clips did Natalia sell altogether in April and May?
+                                </div>
+                            </div>
+
+                            <!-- LLaDA-Instruct Section -->
+                            <div>
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">LLaDA-Instruct</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Natalia sold clips to 48 friends in April. She sold half as many clips in May, so she sold 48/2 = 24 clips in May.
+                                    Altogether, Natalia sold 48 + 24 = 72 clips in April and May. The final result is 72.
+                                </div>
+                            </div>
+
+                            <!-- User Section -->
+                            <div style="margin-bottom: 20px;">
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">User</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Natalia sold three times as many items in June as she did in May. How many clips did Natalia sell altogether in these three months?
+                                </div>
+                            </div>
+
+                            <!-- LLaDA-Instruct Section -->
+                            <div>
+                                <div style="font-weight: bold; color: #333; padding-bottom: 10px; font-size: 22px;">LLaDA-Instruct</div>
+                                <div style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; border-radius: 8px; line-height: 1.6; font-size: 22px;">
+                                    Natalia sold clips to 48 friends in April. She sold half as many clips in May, so she sold 48/2 = 24 clips in May.
+                                    Natalia sold three times as many items in June as she did in May, so she sold 24 * 3 = 72 clips in June.
+                                    Altogether, Natalia sold 48 + 24 + 72 = 144 clips in these three months. The final result is 144.
+                                </div>
+                            </div>
+
+
+                        </div>
+                </div>
+
+            </div>
+        </section>
+
 
         <section class="section" id="BibTeX">
             <div class="container is-max-desktop content">
-                <h2 class="title">BibTeX</h2>
-                Please consider cite our paper:
+                <h2 class="title" style="font-family: 'Times New Roman', serif;">
+                    BibTeX
+                </h2>
                 <pre><code>Comming soon.</code></pre>
             </div>
         </section>
+
 
         <section class="section" id="refer">
             <div class="container is-max-desktop content">
@@ -677,11 +714,6 @@
                         and Li, C. Your absorbing discrete diffusion secretly
                         models the conditional distributions of clean data.
                         arXiv preprint arXiv:2406.03736, 2024.
-                    </p>
-                    <p>
-                        [3] Nie, S., Zhu, F., Du, C., Pang, T., Liu, Q., Zeng,
-                        G., Lin, M., and Li, C. Scaling up masked diffusion
-                        models on text. arXiv preprint arXiv:2410.18514, 2024.
                     </p>
                 </blockquote>
             </div>
