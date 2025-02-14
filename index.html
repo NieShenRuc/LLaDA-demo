@@ -184,8 +184,9 @@
                             </div>
 
                             <p style="text-align: center; margin-top: 20px; font-size: 24px;">
-                                <strong>TL;DR:</strong> <span style="color: #1E88E5;">We present LLaDA, a diffusion
-                                language model trained from scratch that is competitive to LLaMA 3.</span>
+                                <strong>TL;DR:</strong> <span style="color: #1E88E5;">We introduce LLaDA, a diffusion model with an unprecedented 8B scale, trained entirely from scratch, rivaling LLaMA3 8B in performance.
+                                </span>
+ 
                             </p>
 
                         </div>
@@ -200,20 +201,22 @@
                     class="container"
                     style="
                         display: flex;
-                        justify-content: space-around;
-                        gap: 20px;
+                        justify-content: center;
+                        gap: 1px;
                     "
                 >
                     <div class="item" style="text-align: center">
                         <img
                             src="static/images/LLaDA_vs_LLaMA.svg"
                             alt="LLaDA_vs_LLaMA"
+                            style="width: 75%; max-width: 1000px;"
                         />
                     </div>
                     <div class="item" style="text-align: center">
                         <img
                             src="static/images/LLaDA_vs_LLaMA_chat.svg"
                             alt="LLaDA_vs_LLaMA_chat"
+                            style="width: 75%; max-width: 1000px;"
                         />
                     </div>
                 </div>
@@ -261,26 +264,14 @@
                 </h2>
 
                 <p style="font-size: 1.6rem; font-family: 'Times New Roman', Times, serif;">
-                    We assume that large language models derive their intelligence not from the autoregressive
-                    mechanism itself, but from the fundamental principle of generative modeling—approximating
-                    the true language distribution via maximum likelihood estimation or KL divergence minimization.
-
+                    We contend that the intelligence of LLMs—manifested in <i>scalability</i>, <i>instruction-following</i>, <i>in-context learning</i>,
+                    <i>conversational ability</i>, and <i>compression—stems</i> not from the autoregressive mechanism per se, but rather from
+                    the core principle of generative modeling: approximating the true language distribution through maximum
+                    likelihood estimation.
                 </p>
-                <img
-                    src="static/images/min_kl.svg"
-                    alt="min_kl"
-                    style="
-                        width: 80%;
-                        height: auto;
-                        margin-bottom: 2px;
-                        margin-left: 10%;
-                    "
-                />
-
                 <p style="font-size: 1.6rem; font-family: 'Times New Roman', Times, serif;">
-                    The training objective of masked diffusion models on text has been shown to serve as an upper
-                    bound on the negative log-likelihood of the model distribution [1, 2], which is equivalent
-                    to maximum likelihood estimation and minimization of the KL divergence.
+                    We introduce <b>LLaDA</b> (<b>L</b>arge <b>La</b>nguage <b>D</b>iffusion with m<b>A</b>sking), a simple yet principled
+                    generative paradigm for large language models that demonstrates the aforementioned remarkable capabilities.
                 </p>
 
                 <h2 class="title" style="font-family: 'Times New Roman', serif;">
@@ -288,12 +279,15 @@
                 </h2>
 
                 <p style="font-size: 1.6rem; font-family: 'Times New Roman', Times, serif;">
-                    LLaDA is a masked diffusion model [1, 2] that employs the following methods
-                    for pre-training , supervised fine-tuning (SFT), and sampling.
+                    LLaDA is a masked diffusion model [1, 2] that follows standard pretraining and SFT
+                    while sampling via diffusion. During pretraining, it masks all tokens randomly
+                    at ratio \( t ∼ U[0,1] \); in SFT, only response tokens may be masked. The model
+                    simulates diffusion from full masking (\(t = 1\)) to unmasking (\(t = 0\)), predicting
+                    all masks simultaneously at each step with flexible remasking.
                 </p>
             </div>
 
-            <div style="width: 100%; max-width: 1400px; margin: 0 auto; overflow: hidden;">
+            <div class="container is-max-desktop content">
                 <img
                     src="static/images/method.svg"
                     alt="method"
@@ -301,60 +295,59 @@
                 />
             </div>
 
+
             <div class="container is-max-desktop content">
                 <h2 class="title" style="font-family: 'Times New Roman', serif;">
                     Scalability
                 </h2>
                 <p style="font-size: 1.6rem; font-family: 'Times New Roman', Times, serif;">
                     LLaDA demonstrates impressive scalability, with its overall
-                    trend being highly competitive with that of autoregressive baseline.
+                    trend being highly competitive with that of autoregressive baseline on the same data.
                 </p>
 
             </div>
 
-            <div class="image-gallery">
-                <div class="row">
+            <div class="container is-max-desktop content">
+                <div class="row" style="display: flex; justify-content: center; gap: 20px;">
                     <img
                         src="static/images/scaling_mmlu.svg"
                         alt="scaling_mmlu"
                         style="
-                            width: 25%;
+                            width: 30%;
                             height: auto;
                             margin-bottom: 20px;
-                            margin-left: 150px;
                         "
                     />
                     <img
                         src="static/images/scaling_arc_c.svg"
                         alt="scaling_arc_c"
-                        style="width: 25%; height: auto; margin-bottom: 20px"
+                        style="width: 30%; height: auto; margin-bottom: 20px"
                     />
                     <img
                         src="static/images/scaling_cmmlu.svg"
                         alt="scaling_cmmlu"
-                        style="width: 25%; height: auto; margin-bottom: 20px"
+                        style="width: 30%; height: auto; margin-bottom: 20px"
                     />
                 </div>
-                <div class="row">
+                <div class="row" style="display: flex; justify-content: center; gap: 20px;">
                     <img
                         src="static/images/scaling_piqa.svg"
                         alt="scaling_piqa"
                         style="
-                            width: 25%;
+                            width: 30%;
                             height: auto;
                             margin-bottom: 20px;
-                            margin-left: 150px;
                         "
                     />
                     <img
                         src="static/images/scaling_gsm8k.svg"
                         alt="scaling_gsm8k"
-                        style="width: 25%; height: auto; margin-bottom: 20px"
+                        style="width: 30%; height: auto; margin-bottom: 20px"
                     />
                     <img
                         src="static/images/scaling_humaneval.svg"
                         alt="scaling_humaneval"
-                        style="width: 25%; height: auto; margin-bottom: 20px"
+                        style="width: 30%; height: auto; margin-bottom: 20px"
                     />
                 </div>
             </div>
